@@ -2,9 +2,7 @@
 #include <mpi.h>
 #include "process.h"
 
-#define SIZE 40
-
-void cliente(){
+void process(){
   FILE *file;
   char path_save[SIZE]; 
   char line[SIZE]; 

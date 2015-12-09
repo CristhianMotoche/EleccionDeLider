@@ -3,27 +3,29 @@
 #include "process.h"
 #include "function.h"
 
+#define N 8
+#define F 1
+
 int main(int arg, char *argv[]){
-  int r, p;
+  int r, p, i;
+  int id = F;
   MPI_Init(&arg, &argv);
   MPI_Comm_rank(MPI_COMM_WORLD, &r);
   MPI_Comm_size(MPI_COMM_WORLD, &p);
-  while(1){
-    if(r == 0){
-      printf("Copiar un nuevo archivo\n");
-      cliente();
+  if(r == 0){
+    printf("Envio desde rank: %d\n", r);
+    MPI_Send(&id, 1, MPI_INT, r+1, r, MPI_COMM_WORLD);
+  }
+  for(i = 1; i < N - 1; i++){
+    if(r == i){
+      printf("Esperando desde rank: %d\n", r);
+      MPI_Recv(&id, 1, MPI_INT, r-1, r-1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+      printf("Envio desde rank: %d\n", r);
+      MPI_Send(&id, 1, MPI_INT, r+1, r, MPI_COMM_WORLD);
     }
-    else if (r == 1){
-      int empezarUno = 1;
-      MPI_Recv(&empezarUno, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      MPI_Send(&empezarUno, 1, MPI_INT, 2, 0, MPI_COMM_WORLD);
-      servidor("ri2.txt", 1);
-    }
-    else if (r == 2){
-      int empezarDos;
-      MPI_Recv(&empezarDos, 1, MPI_INT, 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      servidor("ri2-2.txt", 2);
-    }
+  }
+  if(r == N - 1){
+    printf("Envio desde rank: %d\n", r);
   }
   MPI_Finalize();
   return 0;
