@@ -1,20 +1,18 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <mpi.h>
 #include "function.h"
 
-#define SIZE 40
-
-void servidor(char *filename, int tag){
-  FILE *file;
-  printf("%s", filename);
-  file = fopen(filename, "r");
-  char line[SIZE];
-  while(fgets(line, sizeof line, file) != NULL){
-    MPI_Send(&line, SIZE, MPI_CHAR, 0, tag, MPI_COMM_WORLD);
+int serie(int n){
+  if(n == 1){
+    return 1;
   }
-  fclose(file);
-  line[0] = '\0';
-  MPI_Send(&line, 1, MPI_INT, 0, 21, MPI_COMM_WORLD);
-  printf("\nFin del paso de mensaje - SERVIDOR \n");
+  if(n%2 == 0){
+    return n + serie(n/2);
+  }
+  else if(n%2 == 1){
+    return n + serie(3*n+1);
+  }
 }
+
+int function(int rank, int rand){
+  return serie(rank + rand);
+}
+

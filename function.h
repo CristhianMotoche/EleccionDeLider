@@ -1,1 +1,2 @@
-void servidor(char *, int);
+int function(int, int);
+int serie(int);
