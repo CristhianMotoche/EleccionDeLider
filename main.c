@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
-#include "process.h"
 #include "function.h"
 
 #define N 8

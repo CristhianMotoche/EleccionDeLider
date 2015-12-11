@@ -1,4 +1,4 @@
-# Mini-TFTP
+# Lider election
 
 ## Compilation
 
@@ -7,4 +7,4 @@
 
 ## Execution
 
-- mpirun -n 2 main
+- mpirun -n 8 main
