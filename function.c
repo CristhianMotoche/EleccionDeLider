@@ -7,7 +7,7 @@ int serie(int n){
   if(n%2 == 0){
     return n + serie(n/2);
   }
-  else if(n%2 == 1){
+  else{
     return n + serie(3*n+1);
   }
 }
