@@ -1,4 +1,4 @@
-# Lider election
+# Leader election
 
 ## Compilation
 
