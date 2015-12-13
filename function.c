@@ -1,18 +1,18 @@
 #include "function.h"
 
 int hailstone(int n){
-  if(n == 1){
-    return 1;
-  }
-  if(n%2 == 0){
-    return n + hailstone(n/2);
-  }
-  else{
-    return n + hailstone(3*n+1);
-  }
+    if(n == 1){
+        return 1;
+    }
+    if(n%2 == 0){
+        return n + hailstone(n/2);
+    }
+    else{
+        return n + hailstone(3*n+1);
+    }
 }
 
 int function(int rank, int rand){
-  return hailstone(rank + rand);
+    return hailstone(rank + rand);
 }
 
