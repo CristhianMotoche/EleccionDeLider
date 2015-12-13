@@ -8,3 +8,5 @@
 ## Execution
 
 - mpirun -n 8 main
+
+![EL](EL.png)
